@@ -657,8 +657,10 @@ where
 
     // Checks if the arg matches a subcommand name, or any of it's aliases (if defined)
     fn possible_subcommand(&self, arg_os: &OsStr) -> (bool, Option<&str>) {
-        #[cfg(not(any(target_os = "windows", target_arch = "wasm32")))]
+        #[cfg(not(any(target_os = "windows", target_os = "sunrise", target_arch = "wasm32")))]
         use std::os::unix::ffi::OsStrExt;
+        #[cfg(target_os = "sunrise")]
+        use std::os::sunrise::ffi::OsStrExt;
         #[cfg(any(target_os = "windows", target_arch = "wasm32"))]
         use osstringext::OsStrExt3;
         debugln!("Parser::possible_subcommand: arg={:?}", arg_os);

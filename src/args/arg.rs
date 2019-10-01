@@ -4,8 +4,10 @@ use std::rc::Rc;
 use std::ffi::{OsStr, OsString};
 #[cfg(any(target_os = "windows", target_arch = "wasm32"))]
 use osstringext::OsStrExt3;
-#[cfg(not(any(target_os = "windows", target_arch = "wasm32")))]
+#[cfg(not(any(target_os = "windows", target_os = "sunrise", target_arch = "wasm32")))]
 use std::os::unix::ffi::OsStrExt;
+#[cfg(target_os = "sunrise")]
+use std::os::sunrise::ffi::OsStrExt;
 use std::env;
 
 #[cfg(feature = "yaml")]

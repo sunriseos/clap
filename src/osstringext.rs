@@ -1,9 +1,10 @@
 #[cfg(any(target_os = "windows", target_arch = "wasm32"))]
 use INVALID_UTF8;
 use std::ffi::OsStr;
-#[cfg(not(any(target_os = "windows", target_arch = "wasm32")))]
+#[cfg(not(any(target_os = "windows", target_os = "sunrise", target_arch = "wasm32")))]
 use std::os::unix::ffi::OsStrExt;
-
+#[cfg(target_os = "sunrise")]
+use std::os::sunrise::ffi::OsStrExt;
 #[cfg(any(target_os = "windows", target_arch = "wasm32"))]
 pub trait OsStrExt3 {
     fn from_bytes(b: &[u8]) -> &Self;
